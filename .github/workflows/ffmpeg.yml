@@ -26,7 +26,7 @@ jobs:
         mkdir build
         mkdir installed
         cd build
-        c:\msys64\msys2 -c '../ffmpeg/configure \
+        c:\msys64\usr\bin\bash -lc '../ffmpeg/configure \
              --prefix=../installed \
              --toolchain=msvc \
              --arch=x86_64 \
