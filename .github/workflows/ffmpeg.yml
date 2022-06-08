@@ -26,7 +26,7 @@ jobs:
         mkdir build
         mkdir installed
         cd build
-        ../ffmpeg/configure \
+        msys2 -c '../ffmpeg/configure \
              --prefix=../installed \
              --toolchain=msvc \
              --arch=x86_64 \
@@ -40,7 +40,7 @@ jobs:
              --enable-gpl \
              --enable-non-free \
              --extra-ldflags="-LIBPATH:../installed/lib/" \
-             --extra-cflags="-I../installed/include/"
+             --extra-cflags="-I../installed/include/"'
     - name: Package binaries
       run: |
         # Create archive of the pre-built Qt binaries
