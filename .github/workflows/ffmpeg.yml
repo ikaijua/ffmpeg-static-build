@@ -47,7 +47,6 @@ jobs:
              --enable-asm \
              --disable-doc \
              --disable-programs \
-             --enable-libx264 \
              --enable-gpl \
              --enable-nonfree \
              --extra-ldflags="-LIBPATH:../installed/lib/" \
@@ -58,7 +57,7 @@ jobs:
     - name: Package binaries
       run: |
         # Create archive of the pre-built Qt binaries
-        7z a ffmpeg-libs.zip ..\installed
+        7z a ffmpeg-libs.zip .\installed
     - uses: actions/upload-artifact@v1
       with:
         name: ffmpeg-libs.zip
