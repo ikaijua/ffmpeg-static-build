@@ -26,6 +26,7 @@ jobs:
         mkdir build
         mkdir installed
         cd build
+        c:\msys64\usr\bin\bash -lc 'pacman -Syu make diffutils yasm nasm'
         c:\msys64\usr\bin\bash -lc 'export CC=cl && cd ../../d/a/ffmpeg-static-build/ffmpeg-static-build/build/ && ../ffmpeg/configure \
              --prefix=../installed \
              --target-os=win64 \
