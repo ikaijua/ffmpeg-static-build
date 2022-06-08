@@ -28,7 +28,8 @@ jobs:
         mkdir build
         mkdir installed
         cd build
-        c:\msys64\usr\bin\bash -lc '../ffmpeg/configure \
+        dir ffmpeg
+        c:\msys64\usr\bin\bash -lc 'cd D/a/ffmpeg-static-build/ffmpeg-static-build/build/ && ../ffmpeg/configure \
              --prefix=../installed \
              --toolchain=msvc \
              --arch=x86_64 \
