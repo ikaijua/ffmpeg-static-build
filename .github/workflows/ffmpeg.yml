@@ -17,12 +17,14 @@ jobs:
       run: |
         # Clone FFMPEG repo
         git clone --depth 1 git://source.ffmpeg.org/ffmpeg.git -b release/5.0
+        dir
         # Setup the compiler
         cmd.exe /c "call `"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat`" && set > %temp%\vcvars.txt"
         Get-Content "$env:temp\vcvars.txt" | Foreach-Object { if ($_ -match "^(.*?)=(.*)$") { Set-Content "env:\$($matches[1])" $matches[2] } }
         # Run MSYS2 shell
         c:/msys64/msys2_shell.cmd
         # Create shadow build folder
+        dir
         mkdir build
         mkdir installed
         cd build
