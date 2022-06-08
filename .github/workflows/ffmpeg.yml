@@ -13,19 +13,25 @@ jobs:
     steps:
     - name: Clone repository
       uses: actions/checkout@v2
-    - name: Compile static FFMPEG libs
+    - name: Set up msvc
+      uses: ilammy/msvc-dev-cmd@v1
+    - name: Set up msys
+      uses: msys2/setup-msys2@v2
+      with:
+        update: true
+        install: >-
+          make 
+          diffutils 
+          yasm 
+          nasm
+          git
+        path-type: inherit
+    - name: Build project
       run: |
-        # Clone FFMPEG repo
-        git clone --depth 1 git://source.ffmpeg.org/ffmpeg.git -b release/5.0
-        # Create shadow build folder
-        mkdir build
-        mkdir installed
-        # Setup the compiler
-        cmd.exe /c "call `"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat`" && set > %temp%\vcvars.txt"
-        Get-Content "$env:temp\vcvars.txt" | Foreach-Object { if ($_ -match "^(.*?)=(.*)$") { Set-Content "env:\$($matches[1])" $matches[2] } }
-        # Run MSYS2 build
-        c:\msys64\usr\bin\bash -lc 'pacman -Syu make diffutils yasm nasm'
-        c:\msys64\usr\bin\bash -lc 'mv /usr/bin/link.exe /usr/bin/link.exe.bak && export CC=cl && cd ../../d/a/ffmpeg-static-build/ffmpeg-static-build/build/ && ../ffmpeg/configure \
+        mv /usr/bin/link.exe /usr/bin/link.exe.bak 
+        export CC=cl 
+        cd ../../d/a/ffmpeg-static-build/ffmpeg-static-build/build/ 
+        ../ffmpeg/configure \
              --prefix=../installed \
              --target-os=win64 \
              --toolchain=msvc \
@@ -38,7 +44,10 @@ jobs:
              --enable-gpl \
              --enable-nonfree \
              --extra-ldflags="-LIBPATH:../installed/lib/" \
-             --extra-cflags="-I../installed/include/" && make V=1 -j 8 && make install'
+             --extra-cflags="-I../installed/include/" 
+         make V=1 -j 8 
+         make install
+      shell: msys2 {0}
     - name: Package binaries
       run: |
         # Create archive of the pre-built Qt binaries
