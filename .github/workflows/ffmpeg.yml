@@ -26,7 +26,7 @@ jobs:
         mkdir build
         mkdir installed
         cd build
-        c:\msys64\usr\bin\bash -lc 'ls ../../d/a && cd ../../d/a/ffmpeg-static-build/ffmpeg-static-build/build/ && ../ffmpeg/configure \
+        c:\msys64\usr\bin\bash -lc 'export CC=cl && cd ../../d/a/ffmpeg-static-build/ffmpeg-static-build/build/ && ../ffmpeg/configure \
              --prefix=../installed \
              --target-os=win64 \
              --toolchain=msvc \
@@ -39,7 +39,7 @@ jobs:
              --enable-gpl \
              --enable-nonfree \
              --extra-ldflags="-LIBPATH:../installed/lib/" \
-             --extra-cflags="-I../installed/include/"'
+             --extra-cflags="-I../installed/include/" && make V=1 -j 8 && make install'
     - name: Package binaries
       run: |
         # Create archive of the pre-built Qt binaries
