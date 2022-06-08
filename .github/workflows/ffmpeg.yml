@@ -1,0 +1,51 @@
+name: BuildFFMPEGLibs
+
+on:
+  push:
+    branches:
+    # Change this to the branch name which you are developing on to trigger the workflow
+    - main
+
+jobs:
+  GenerateWinStaticBinaries:
+    runs-on: windows-2019
+
+    steps:
+    - name: Clone repository
+      uses: actions/checkout@v2
+    - name: Compile static FFMPEG libs
+      run: |
+        # Clone FFMPEG repo
+        git clone --depth 1 git://source.ffmpeg.org/ffmpeg.git -b release/5.0
+        # Setup the compiler
+        cmd.exe /c "call `"C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Auxiliary\Build\vcvars64.bat`" && set > %temp%\vcvars.txt"
+        Get-Content "$env:temp\vcvars.txt" | Foreach-Object { if ($_ -match "^(.*?)=(.*)$") { Set-Content "env:\$($matches[1])" $matches[2] } }
+        # Run MSYS2 shell
+        c:/msys64/msys2_shell.cmd
+        # Create shadow build folder
+        mkdir build
+        mkdir installed
+        cd build
+        ../ffmpeg/configure \
+             --prefix=../installed \
+             --toolchain=msvc \
+             --arch=x86_64 \
+             --enable-yasm  \
+             --enable-asm \
+             --enable-shared \
+             --disable-static \
+             --disable-programs \
+             --enable-avresample \
+             --enable-libx264 \
+             --enable-gpl \
+             --enable-non-free \
+             --extra-ldflags="-LIBPATH:../installed/lib/" \
+             --extra-cflags="-I../installed/include/"
+    - name: Package binaries
+      run: |
+        # Create archive of the pre-built Qt binaries
+        7z a ffmpeg-libs.zip ..\installed
+    - uses: actions/upload-artifact@v1
+      with:
+        name: ffmpeg-libs.zip
+        path: ffmpeg-libs.zip
