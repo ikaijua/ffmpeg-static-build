@@ -29,8 +29,10 @@ jobs:
     - name: Build project
       run: |
         mv /usr/bin/link.exe /usr/bin/link.exe.bak 
+        pwd
+        ls
         export CC=cl 
-        cd ../../d/a/ffmpeg-static-build/ffmpeg-static-build/build/ 
+        cd /d/a/ffmpeg-static-build/ffmpeg-static-build/build/ 
         ../ffmpeg/configure \
              --prefix=../installed \
              --target-os=win64 \
