@@ -28,16 +28,16 @@ jobs:
         cd build
         c:\msys64\usr\bin\bash -lc 'ls ../../d/a && cd ../../d/a/ffmpeg-static-build/ffmpeg-static-build/build/ && ../ffmpeg/configure \
              --prefix=../installed \
+             --target-os=win64
              --toolchain=msvc \
              --arch=x86_64 \
              --enable-yasm  \
              --enable-asm \
-             --enable-shared \
-             --disable-static \
+             --disable-doc \
              --disable-programs \
              --enable-libx264 \
              --enable-gpl \
-             --enable-non-free \
+             --enable-nonfree \
              --extra-ldflags="-LIBPATH:../installed/lib/" \
              --extra-cflags="-I../installed/include/"'
     - name: Package binaries
