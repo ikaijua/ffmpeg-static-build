@@ -34,10 +34,9 @@ jobs:
         # Create shadow build folder
         mkdir build
         mkdir installed
-        pwd
-        ls
-        export CC=cl 
         cd ./build/ 
+        # Configure and build project
+        export CC=cl 
         ../ffmpeg/configure \
              --prefix=../installed \
              --target-os=win64 \
@@ -56,7 +55,7 @@ jobs:
       shell: msys2 {0}
     - name: Package binaries
       run: |
-        # Create archive of the pre-built Qt binaries
+        # Create archive of the pre-built FFMPEG libraries
         7z a ffmpeg-libs.zip .\installed
     - uses: actions/upload-artifact@v1
       with:
