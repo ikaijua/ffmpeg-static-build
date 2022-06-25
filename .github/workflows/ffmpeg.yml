@@ -25,6 +25,7 @@ jobs:
           yasm 
           nasm
           git
+          mingw-w64-x86_64-freetype
         path-type: inherit
     - name: Build project
       run: |
