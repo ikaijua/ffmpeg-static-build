@@ -48,6 +48,7 @@ jobs:
              --disable-programs \
              --enable-gpl \
              --enable-nonfree \
+             --enable-libfreetype \
              --extra-ldflags="-LIBPATH:../installed/lib/" \
              --extra-cflags="-I../installed/include/" 
          make V=1 -j 8 
