@@ -35,7 +35,7 @@ jobs:
         # Build freetype
         mkdir build && cd build
         cmake .. -DFT_REQUIRE_HARFBUZZ=OFF -DFT_DISABLE_BZIP2=OFF -DCMAKE_BUILD_TYPE=Release
-        cmake --build . --config Release -- -j4
+        cmake --build . --config Release -DFT_REQUIRE_HARFBUZZ=OFF -DFT_DISABLE_BZIP2=OFF -DCMAKE_BUILD_TYPE=Release -- -j4
         make install
         # Clone FFMPEG repo
         git clone --depth 1 git://source.ffmpeg.org/ffmpeg.git -b release/5.0
