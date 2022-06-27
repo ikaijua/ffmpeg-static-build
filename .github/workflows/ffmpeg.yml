@@ -14,10 +14,10 @@ jobs:
     - name: Download freetype
       run: |
         # Download the pre-built static version of freetype2
-        Invoke-WebRequest https://dl.xirac.com/qt/freetype-lib.zip -OutFile .\freetype-lib.zip
-        expand-archive -path "freetype-lib.zip" -destinationpath "d:/freetype"
-        dir d:/freetype/  
-        echo "d:\freetype\lib" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+        #Invoke-WebRequest https://dl.xirac.com/qt/freetype-lib.zip -OutFile .\freetype-lib.zip
+        #expand-archive -path "freetype-lib.zip" -destinationpath "d:/freetype"
+        #dir d:/freetype/  
+        ##echo "d:\freetype\lib" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
     - name: Clone repository
       uses: actions/checkout@v2
     - name: Set up msvc
@@ -36,6 +36,17 @@ jobs:
     - name: Build project
       run: |
         mv /usr/bin/link.exe /usr/bin/link.exe.bak 
+        
+        git clone --depth 1 http://git.savannah.gnu.org/cgit/freetype/freetype2.git
+        
+        cd freetype2
+        ./autogen.sh
+        ./configure --disable-shared --enable-static
+        make -j4
+        make install
+         
+         
+         
         # Clone FFMPEG repo
         git clone --depth 1 git://source.ffmpeg.org/ffmpeg.git -b release/5.0
         # Create shadow build folder
