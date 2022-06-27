@@ -30,6 +30,14 @@ jobs:
     - name: Build project
       run: |
         mv /usr/bin/link.exe /usr/bin/link.exe.bak 
+        # Clone freetype repo
+        git clone --depth 1 https://git.savannah.nongnu.org/git/freetype/freetype2.git
+        cd freetype2
+        # Build freetype
+        ./autogen.sh
+        ./configure --without-harfbuzz --disable-shared 
+        make -j4
+        make install
         # Clone FFMPEG repo
         git clone --depth 1 git://source.ffmpeg.org/ffmpeg.git -b release/5.0
         # Create shadow build folder
