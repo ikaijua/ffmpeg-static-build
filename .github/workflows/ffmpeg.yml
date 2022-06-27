@@ -34,7 +34,6 @@ jobs:
         cd freetype2
         # Build freetype
         mkdir build && cd build
-        cmake .. -DWITH_BZip2=Off  -DWITH_ZLIB=Off  -DWITH_PNG=Off -DWITH_HARFBUZZ=Off -DCMAKE_BUILD_TYPE=Release
         cmake --build . --config Release -- -j4
         make install
         # Clone FFMPEG repo
