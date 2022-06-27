@@ -29,13 +29,11 @@ jobs:
     - name: Build project
       run: |
         mv /usr/bin/link.exe /usr/bin/link.exe.bak 
-        # Clone freetype repo
-        git clone --depth 1 https://git.savannah.nongnu.org/git/freetype/freetype2.git
-        cd freetype2
-        # Build freetype
-        mkdir build && cd build
-        cmake --build . --config Release -- -j4
-        make install
+        
+        # Download the pre-built static version of freetype2
+        Invoke-WebRequest https://dl.xirac.com/qt/freetype-lib.zip -OutFile .\freetype-lib.zip
+        expand-archive -path "freetype-lib.zip" -destinationpath "c:/freetype"
+        dir c:/freetype/        
         # Clone FFMPEG repo
         git clone --depth 1 git://source.ffmpeg.org/ffmpeg.git -b release/5.0
         # Create shadow build folder
@@ -56,8 +54,8 @@ jobs:
              --enable-gpl \
              --enable-nonfree \
              --enable-libfreetype \
-             --extra-ldflags="-LIBPATH:../installed/lib/" \
-             --extra-cflags="-I../installed/include/" 
+             --extra-ldflags="-LIBPATH:/c/freetype/lib/" \
+             --extra-cflags="-I/c/freetype/include/" 
          make V=1 -j 8 
          make install
       shell: msys2 {0}
