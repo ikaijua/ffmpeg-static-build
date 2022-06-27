@@ -43,6 +43,7 @@ jobs:
         cd ./build/ 
         # Configure and build project
         export CC=cl 
+        ls -l ./../../freetype/lib
         ../ffmpeg/configure \
              --prefix=../installed \
              --target-os=win64 \
@@ -55,8 +56,8 @@ jobs:
              --enable-gpl \
              --enable-nonfree \
              --enable-libfreetype \
-             --extra-ldflags="-LIBPATH:/c/freetype/lib/" \
-             --extra-cflags="-I/c/freetype/include/" 
+             --extra-ldflags="-LIBPATH:./../../freetype/lib/" \
+             --extra-cflags="-I./../../freetype/include/" 
          make V=1 -j 8 
          make install
       shell: msys2 {0}
