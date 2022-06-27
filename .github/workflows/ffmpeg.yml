@@ -17,6 +17,7 @@ jobs:
         Invoke-WebRequest https://dl.xirac.com/qt/freetype-lib.zip -OutFile .\freetype-lib.zip
         expand-archive -path "freetype-lib.zip" -destinationpath "d:/freetype"
         dir d:/freetype/  
+        echo "d:\freetype\lib" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
     - name: Clone repository
       uses: actions/checkout@v2
     - name: Set up msvc
