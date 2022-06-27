@@ -46,11 +46,11 @@ jobs:
         cd freetype2
         ./autogen.sh
         ./configure --help
-        ./configure --disable-shared --enable-static --with-png=no --with-harfbuzz=no
+        ./configure --prefix=./installed --disable-shared --enable-static --with-png=no --with-harfbuzz=no
         make -j4
         make install
-         
-         
+        
+        cd ..        
          
         # Clone FFMPEG repo
         git clone --depth 1 git://source.ffmpeg.org/ffmpeg.git -b release/5.0
@@ -61,6 +61,7 @@ jobs:
         # Configure and build project
         export CC=cl 
         pwd
+        tree ../freetype/installed
         ../ffmpeg/configure \
              --prefix=../installed \
              --target-os=win64 \
@@ -73,8 +74,8 @@ jobs:
              --enable-gpl \
              --enable-nonfree \
              --enable-libfreetype \
-             --extra-ldflags="-LIBPATH:../installed/lib/" \
-             --extra-cflags="-I../installed/include/"  
+             --extra-ldflags="-LIBPATH:../freetype/installed/lib/" \
+             --extra-cflags="-I../freetype/installed/include/"  
          make V=1 -j 8 
          make install
       shell: msys2 {0}
