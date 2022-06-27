@@ -46,7 +46,7 @@ jobs:
         cd freetype2
         ./autogen.sh
         ./configure --help
-        ./configure --prefix=/d/a/freetype/ --build=win64 --disable-shared --enable-static --with-png=no --with-harfbuzz=no
+        ./configure --prefix=/d/a/freetype/ --disable-shared --enable-static --with-png=no --with-harfbuzz=no
         make -j4
         make install
         
