@@ -45,6 +45,7 @@ jobs:
         
         cd freetype2
         ./autogen.sh
+        ./configure --help
         ./configure --disable-shared --enable-static
         make -j4
         make install
