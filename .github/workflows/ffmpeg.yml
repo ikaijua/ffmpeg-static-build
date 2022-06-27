@@ -46,7 +46,7 @@ jobs:
         cd freetype2
         ./autogen.sh
         ./configure --help
-        ./configure --prefix=./installed --build=win64 --disable-shared --enable-static --with-png=no --with-harfbuzz=no
+        ./configure --prefix=/d/a/freetype/ --build=win64 --disable-shared --enable-static --with-png=no --with-harfbuzz=no
         make -j4
         make install
         
@@ -61,7 +61,7 @@ jobs:
         # Configure and build project
         export CC=cl 
         pwd
-        tree ../freetype/installed
+        tree /d/a/freetype/
         ../ffmpeg/configure \
              --prefix=../installed \
              --target-os=win64 \
@@ -74,8 +74,8 @@ jobs:
              --enable-gpl \
              --enable-nonfree \
              --enable-libfreetype \
-             --extra-ldflags="-LIBPATH:../freetype/installed/lib/" \
-             --extra-cflags="-I../freetype/installed/include/"  
+             --extra-ldflags="-LIBPATH:/d/a/freetype/lib/" \
+             --extra-cflags="-I/d/a/freetype/include/"  
          make V=1 -j 8 
          make install
       shell: msys2 {0}
