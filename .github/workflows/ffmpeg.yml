@@ -25,7 +25,6 @@ jobs:
           yasm 
           nasm
           git
-          mingw-w64-x86_64-freetype
         path-type: inherit
     - name: Build project
       run: |
@@ -34,8 +33,8 @@ jobs:
         git clone --depth 1 https://git.savannah.nongnu.org/git/freetype/freetype2.git
         cd freetype2
         # Build freetype
-        ./autogen.sh
-        ./configure --without-harfbuzz --disable-shared 
+        mkdir build && cd build
+        cmake .. -DWITH_Harfbuzz=OFF
         make -j4
         make install
         # Clone FFMPEG repo
