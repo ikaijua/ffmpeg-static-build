@@ -15,8 +15,8 @@ jobs:
       run: |
         # Download the pre-built static version of freetype2
         Invoke-WebRequest https://dl.xirac.com/qt/freetype-lib.zip -OutFile .\freetype-lib.zip
-        expand-archive -path "freetype-lib.zip" -destinationpath "c:/freetype"
-        dir c:/freetype/  
+        expand-archive -path "freetype-lib.zip" -destinationpath "d:/freetype"
+        dir d:/freetype/  
     - name: Clone repository
       uses: actions/checkout@v2
     - name: Set up msvc
@@ -44,7 +44,7 @@ jobs:
         # Configure and build project
         export CC=cl 
         pwd
-        ls -l ./../../freetype/lib
+        ls -l ./../../../../freetype/lib
         ../ffmpeg/configure \
              --prefix=../installed \
              --target-os=win64 \
@@ -57,8 +57,8 @@ jobs:
              --enable-gpl \
              --enable-nonfree \
              --enable-libfreetype \
-             --extra-ldflags="-LIBPATH:./../../freetype/lib/" \
-             --extra-cflags="-I./../../freetype/include/" 
+             --extra-ldflags="-LIBPATH:./../../../../freetype/lib/" \
+             --extra-cflags="-I./../../../../freetype/include/" 
          make V=1 -j 8 
          make install
       shell: msys2 {0}
