@@ -61,7 +61,7 @@ jobs:
         # Configure and build project
         export CC=cl 
         pwd
-        tree /d/a/freetype/
+        ls -l /d/a/freetype/
         ../ffmpeg/configure \
              --prefix=../installed \
              --target-os=win64 \
