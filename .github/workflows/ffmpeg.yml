@@ -11,6 +11,12 @@ jobs:
     runs-on: windows-2019
 
     steps:
+    - name: Download freetype
+      run: |
+        # Download the pre-built static version of freetype2
+        Invoke-WebRequest https://dl.xirac.com/qt/freetype-lib.zip -OutFile .\freetype-lib.zip
+        expand-archive -path "freetype-lib.zip" -destinationpath "c:/freetype"
+        dir c:/freetype/  
     - name: Clone repository
       uses: actions/checkout@v2
     - name: Set up msvc
@@ -29,11 +35,6 @@ jobs:
     - name: Build project
       run: |
         mv /usr/bin/link.exe /usr/bin/link.exe.bak 
-        
-        # Download the pre-built static version of freetype2
-        Invoke-WebRequest https://dl.xirac.com/qt/freetype-lib.zip -OutFile .\freetype-lib.zip
-        expand-archive -path "freetype-lib.zip" -destinationpath "c:/freetype"
-        dir c:/freetype/        
         # Clone FFMPEG repo
         git clone --depth 1 git://source.ffmpeg.org/ffmpeg.git -b release/5.0
         # Create shadow build folder
