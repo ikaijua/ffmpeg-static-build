@@ -43,6 +43,7 @@ jobs:
         cd ./build/ 
         # Configure and build project
         export CC=cl 
+        pwd
         ls -l ./../../freetype/lib
         ../ffmpeg/configure \
              --prefix=../installed \
