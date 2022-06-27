@@ -37,7 +37,7 @@ jobs:
       run: |
         mv /usr/bin/link.exe /usr/bin/link.exe.bak 
         
-        git clone --depth 1 http://git.savannah.gnu.org/cgit/freetype/freetype2.git
+        git clone --depth 1 https://git.savannah.nongnu.org/git/freetype/freetype2.git
         
         cd freetype2
         ./autogen.sh
