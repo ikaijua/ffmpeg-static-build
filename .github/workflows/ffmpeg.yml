@@ -30,6 +30,8 @@ jobs:
           make
           autoconf
           automake
+          libtool 
+          m4
           diffutils 
           yasm 
           nasm
