@@ -27,7 +27,8 @@ jobs:
       with:
         update: true
         install: >-
-          make 
+          make
+          automake
           diffutils 
           yasm 
           nasm
