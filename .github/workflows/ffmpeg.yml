@@ -36,7 +36,6 @@ jobs:
           yasm 
           nasm
           git
-          freetype2
         path-type: inherit
     - name: Build project
       run: |
