@@ -36,6 +36,7 @@ jobs:
           yasm 
           nasm
           git
+          freetype2
         path-type: inherit
     - name: Build project
       run: |
@@ -61,7 +62,7 @@ jobs:
         # Configure and build project
         export CC=cl 
         pwd
-        ls -l /d/a/freetype/
+        ls -l ../../../freetype/
         ../ffmpeg/configure \
              --prefix=../installed \
              --target-os=win64 \
@@ -74,8 +75,8 @@ jobs:
              --enable-gpl \
              --enable-nonfree \
              --enable-libfreetype \
-             --extra-ldflags="-LIBPATH:/d/a/freetype/lib/" \
-             --extra-cflags="-I/d/a/freetype/include/"  
+             --extra-ldflags="-LIBPATH:../../../freetype/lib/" \
+             --extra-cflags="-I../../../freetype/include/"  
          make V=1 -j 8 
          make install
       shell: msys2 {0}
