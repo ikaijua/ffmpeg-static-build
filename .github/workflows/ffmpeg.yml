@@ -63,7 +63,8 @@ jobs:
         export CC=cl 
         pwd
         ls -l ../../../freetype/
-        export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/d/a/freetype/
+        ls -l ../../../freetype/lib
+        export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/d/a/freetype/:/d/a/freetype/lib
         
         echo $PKG_CONFIG_PATH
         ../ffmpeg/configure \
