@@ -63,6 +63,9 @@ jobs:
         export CC=cl 
         pwd
         ls -l ../../../freetype/
+        export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/d/a/freetype/
+        
+        echo $PKG_CONFIG_PATH
         ../ffmpeg/configure \
              --prefix=../installed \
              --target-os=win64 \
