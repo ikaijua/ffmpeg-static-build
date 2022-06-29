@@ -68,6 +68,7 @@ jobs:
         export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/d/a/freetype/:/d/a/freetype/lib:/d/a/freetype/lib/pkgconfig
         
         echo $PKG_CONFIG_PATH
+        ../ffmpeg/configure --help
         ../ffmpeg/configure \
              --prefix=../installed \
              --target-os=win64 \
