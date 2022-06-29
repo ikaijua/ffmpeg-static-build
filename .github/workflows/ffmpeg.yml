@@ -75,7 +75,6 @@ jobs:
         ../ffmpeg/configure \
              --prefix=../installed \
              --target-os=win64 \
-             --toolchain=mingw \
              --arch=x86_64 \
              --enable-yasm  \
              --enable-asm \
