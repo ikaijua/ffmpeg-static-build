@@ -36,10 +36,11 @@ jobs:
           yasm 
           nasm
           git
-          #mingw-w64-x86_64-gcc
         path-type: inherit
     - name: Build project
       run: |
+        #mingw-w64-x86_64-gcc
+      
         #mv /usr/bin/link.exe /usr/bin/link.exe.bak 
         
         git clone --depth 1 https://git.savannah.nongnu.org/git/freetype/freetype2.git
