@@ -36,7 +36,7 @@ jobs:
           yasm 
           nasm
           git
-          mingw-w64-x86_64-gcc
+          #mingw-w64-x86_64-gcc
         path-type: inherit
     - name: Build project
       run: |
@@ -48,8 +48,10 @@ jobs:
         ./autogen.sh
         ./configure --help
         ./configure --prefix=/d/a/freetype/ --disable-shared --enable-static --with-png=no --with-harfbuzz=no
-        make -j4
-        make install
+        #make -j4
+        #make install
+        mingw32-make -j4
+        mingw32-make install
         
         cd ..        
          
@@ -86,8 +88,10 @@ jobs:
              --enable-filter=drawtext \
              --extra-ldflags="-LIBPATH:../../../freetype/lib/" \
              --extra-cflags="-I../../../freetype/include/"  
-         make V=1 -j 8 
-         make install
+         #make V=1 -j 8
+         mingw32-make V=1 -j8
+         #make install
+         mingw32-make install
       shell: msys2 {0}
     - name: Package binaries
       run: |
