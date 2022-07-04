@@ -27,18 +27,19 @@ jobs:
       with:
         update: true
         install: >-
-          make
-          autoconf
-          automake
-          libtool 
-          m4
-          diffutils 
           yasm 
           nasm
           git
+          mingw-w64-x86_64-toolchain
         path-type: inherit
     - name: Build project
       run: |
+        #autoconf
+        #automake
+        #libtool 
+        #m4
+        #diffutils 
+        #make
         #mingw-w64-x86_64-gcc
       
         #mv /usr/bin/link.exe /usr/bin/link.exe.bak 
