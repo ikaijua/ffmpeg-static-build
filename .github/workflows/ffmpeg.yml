@@ -27,6 +27,11 @@ jobs:
       with:
         update: true
         install: >-
+          autoconf
+          automake
+          libtool 
+          m4
+          diffutils 
           yasm 
           nasm
           git
@@ -34,11 +39,6 @@ jobs:
         path-type: inherit
     - name: Build project
       run: |
-        #autoconf
-        #automake
-        #libtool 
-        #m4
-        #diffutils 
         #make
         #mingw-w64-x86_64-gcc
       
