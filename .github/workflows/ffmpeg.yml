@@ -49,7 +49,7 @@ jobs:
         cd freetype2
         ./autogen.sh
         ./configure --help
-        ./configure --prefix=/d/a/freetype/ --disable-shared --enable-static --build=mingw --target=win32 --with-png=no --with-harfbuzz=no --with-bzip2=no
+        ./configure --prefix=/d/a/freetype/ --disable-shared --enable-static --build=windows --target=mingw32 --with-png=no --with-harfbuzz=no --with-bzip2=no
         make -j4
         make install
         #mingw32-make -j4
