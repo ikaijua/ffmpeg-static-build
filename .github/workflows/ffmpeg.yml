@@ -79,7 +79,7 @@ jobs:
         
         ../ffmpeg/configure \
              --prefix=../installed \
-             --toolchain=mingw32 \
+             --toolchain=gcc-asan \
              --target-os=win64 \
              --arch=x86_64 \
              --enable-yasm  \
