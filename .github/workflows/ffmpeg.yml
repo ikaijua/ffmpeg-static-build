@@ -91,10 +91,10 @@ jobs:
              --enable-filter=drawtext \
              --extra-ldflags="-LIBPATH:../../../freetype/lib/" \
              --extra-cflags="-I../../../freetype/include/"  
-         #make V=1 -j 8
-         mingw32-make V=1 -j8
-         #make install
-         mingw32-make install
+         make V=1 -j 8
+         #mingw32-make V=1 -j8
+         make install
+         #mingw32-make install
       shell: msys2 {0}
     - name: Package binaries
       run: |
