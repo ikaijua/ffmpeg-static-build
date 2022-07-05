@@ -79,6 +79,7 @@ jobs:
         
         ../ffmpeg/configure \
              --prefix=../installed \
+             --toolchain=mingw32 \
              --target-os=win64 \
              --arch=x86_64 \
              --enable-yasm  \
@@ -91,6 +92,10 @@ jobs:
              --enable-filter=drawtext \
              --extra-ldflags="-LIBPATH:../../../freetype/lib/" \
              --extra-cflags="-I../../../freetype/include/"  
+             
+         ls -l 
+         ls -l ../ffmpeg
+         
          make V=1 -j 8
          #mingw32-make V=1 -j8
          make install
