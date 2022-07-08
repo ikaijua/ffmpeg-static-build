@@ -86,6 +86,12 @@ jobs:
              --enable-asm \
              --disable-doc \
              --disable-programs \
+             --disable-large-tests \
+             --disable-indevs \
+             --disable-bzlib \
+             --disable-iconv \
+             --disable-libxcb \
+             --disable-zlib \
              --enable-gpl \
              --enable-nonfree \
              --enable-libfreetype \
