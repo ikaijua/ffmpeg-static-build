@@ -28,7 +28,7 @@ jobs:
           --with-zlib=no
         
         make -j4
-        make install
+        sudo make install
     - name: Download and Build FFMPEG 5
       run: |
         # Clone FFMPEG repo
