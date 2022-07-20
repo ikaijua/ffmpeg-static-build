@@ -11,24 +11,24 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-#     - name: Download and Build Freetype2
-#       run: |
-#         # Clone freetype2 repo
-#         git clone --depth 1 https://git.savannah.nongnu.org/git/freetype/freetype2.git
-#         cd freetype2
-#         ./autogen.sh
-#         mkdir build
-#         cd build
-#         ../configure \
-#           --disable-shared \
-#           --enable-static \
-#           --with-png=no \
-#           --with-harfbuzz=no \
-#           --with-bzip2=no \
-#           --with-zlib=no
+    - name: Download and Build Freetype2
+      run: |
+        # Clone freetype2 repo
+        git clone --depth 1 https://git.savannah.nongnu.org/git/freetype/freetype2.git
+        cd freetype2
+        ./autogen.sh
+        mkdir build
+        cd build
+        ../configure \
+          --disable-shared \
+          --enable-static \
+          --with-png=no \
+          --with-harfbuzz=no \
+          --with-bzip2=no \
+          --with-zlib=no
         
-#         make -j4
-#         sudo make install
+        make -j4
+        sudo make install
     - name: Download and Build FFMPEG 5
       run: |
         # Install required packages 
