@@ -58,8 +58,7 @@ jobs:
              --enable-libfreetype \
              --enable-filter=drawtext
          
-         ls -l 
-         
+         # Build FFMPEG 
          make -j8
          make install
       shell: msys2 {0}
