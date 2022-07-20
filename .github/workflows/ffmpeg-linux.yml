@@ -69,6 +69,8 @@ jobs:
          # Build FFMPEG
          make -j 8
          make install
+    - name: Package binaries
+      uses: actions/upload-artifact@v1
       with:
         name: ffmpeg-libs-linux-static.zip
         path: ./installed
