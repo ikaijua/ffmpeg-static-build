@@ -70,7 +70,10 @@ jobs:
          make -j 8
          make install
     - name: Package binaries
-      uses: actions/upload-artifact@v1
+      run: |
+        # Create archive of the pre-built FFMPEG libraries
+        7z a ffmpeg-libs-linux-static.7z ./installed
+    - uses: actions/upload-artifact@v1
       with:
         name: ffmpeg-libs-linux-static.zip
-        path: ./installed
+        path: ffmpeg-libs-linux-static.7z
