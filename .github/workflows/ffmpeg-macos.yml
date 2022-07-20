@@ -1,0 +1,83 @@
+name: BuildMacOSFFMPEGLibs
+
+on:
+  push:
+    branches:
+    # Change this to the branch name which you are developing on to trigger the workflow
+    - main
+
+jobs:
+  GenerateMacStaticLibraries:
+    runs-on: macos-12
+
+    steps:
+    - name: Download and Build Freetype2
+      run: |
+        # Clone freetype2 repo
+        git clone --depth 1 https://git.savannah.nongnu.org/git/freetype/freetype2.git
+        cd freetype2
+        ./autogen.sh
+        mkdir build
+        mkdir -p /opt/freetype2/
+        cd build
+        ../configure \
+          --prefix=/opt/freetype2/ \
+          --disable-shared \
+          --enable-static \
+          --with-png=no \
+          --with-harfbuzz=no \
+          --with-bzip2=no \
+          --with-zlib=no
+        
+        make -j4
+        make install
+    - name: Download and Build FFMPEG 5
+      run: |
+        # Install required packages 
+        brew install pkg-config nasm
+        
+        # Add freetype pkg-config files to pkg-config environment variable
+        export PKG_CONFIG_PATH=/opt/freetype2/lib/pcgconfig
+        
+        # Clone FFMPEG repo
+        git clone --depth 1 git://source.ffmpeg.org/ffmpeg.git -b release/5.0
+        # Create shadow build folder
+        mkdir build
+        mkdir installed
+        cd ./build/ 
+        # Configure project
+        ../ffmpeg/configure --help
+        
+        ../ffmpeg/configure \
+             --prefix=../installed \
+             --pkg-config-flags="--static" \
+             --target-os=darwin \
+             --enable-static \
+             --disable-shared \
+             --enable-x86asm  \
+             --enable-asm \
+             --disable-doc \
+             --disable-debug \
+             --disable-programs \
+             --disable-large-tests \
+             --disable-indevs \
+             --disable-bzlib \
+             --disable-iconv \
+             --disable-libxcb \
+             --disable-zlib \
+             --enable-gpl \
+             --enable-nonfree \
+             --enable-libfreetype \
+             --enable-filter=drawtext  
+             
+         # Build FFMPEG
+         make -j 8
+         make install
+    - name: Package binaries
+      run: |
+        # Create archive of the pre-built FFMPEG libraries
+        tar cfvz ffmpeg-libs-macos-static.tar.gz ./installed
+    - uses: actions/upload-artifact@v1
+      with:
+        name: ffmpeg-libs-macos-static
+        path: ffmpeg-libs-macos-static.tar.gz
