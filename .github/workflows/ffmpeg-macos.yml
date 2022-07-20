@@ -14,7 +14,7 @@ jobs:
     - name: Download and Build Freetype2
       run: |
         # Install required packages 
-        brew install autoconf
+        brew install automake
         # Clone freetype2 repo
         git clone --depth 1 https://git.savannah.nongnu.org/git/freetype/freetype2.git
         cd freetype2
