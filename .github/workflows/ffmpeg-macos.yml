@@ -20,7 +20,7 @@ jobs:
         cd freetype2
         ./autogen.sh
         mkdir build
-        mkdir -p /opt/freetype2/
+        sudo mkdir -p /opt/freetype2/
         cd build
         ../configure \
           --prefix=/opt/freetype2/ \
