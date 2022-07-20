@@ -21,6 +21,7 @@ jobs:
         install: >-
           nasm
           git
+          make
           mingw-w64-x86_64-toolchain
           mingw-w64-x86_64-qt5-static
           mingw-w64-x86_64-freetype
