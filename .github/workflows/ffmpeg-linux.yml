@@ -72,7 +72,7 @@ jobs:
     - name: Package binaries
       run: |
         # Create archive of the pre-built FFMPEG libraries
-        7z a ffmpeg-libs-linux-static.zip .\installed
+        7z a ffmpeg-libs-linux-static.zip ./installed
     - uses: actions/upload-artifact@v1
       with:
         name: ffmpeg-libs-linux-static.zip
