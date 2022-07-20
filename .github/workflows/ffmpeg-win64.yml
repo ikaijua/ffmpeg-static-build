@@ -19,12 +19,6 @@ jobs:
       with:
         update: true
         install: >-
-          autoconf
-          automake
-          libtool 
-          m4
-          diffutils 
-          yasm 
           nasm
           git
           mingw-w64-x86_64-toolchain
@@ -48,7 +42,7 @@ jobs:
              --arch=x86_64 \
              --enable-static \
              --disable-shared \
-             --enable-yasm  \
+             --enable-x86asm  \
              --enable-asm \
              --disable-doc \
              --disable-programs \
@@ -62,6 +56,8 @@ jobs:
              --enable-nonfree \
              --enable-libfreetype \
              --enable-filter=drawtext
+         
+         ls -l 
          
          make -j8
          make install
