@@ -47,7 +47,7 @@ jobs:
              --target-os=win64 \
              --arch=x86_64 \
              --enable-static \
-             --disable-static \
+             --disable-shared \
              --enable-yasm  \
              --enable-asm \
              --disable-doc \
