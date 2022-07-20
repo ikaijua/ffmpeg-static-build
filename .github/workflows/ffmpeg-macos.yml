@@ -32,14 +32,14 @@ jobs:
           --with-zlib=no
         
         make -j4
-        make install
+        sudo make install
     - name: Download and Build FFMPEG 5
       run: |
         # Install required packages 
         brew install pkg-config nasm
         
         # Add freetype pkg-config files to pkg-config environment variable
-        export PKG_CONFIG_PATH=/opt/freetype2/lib/pcgconfig
+        export PKG_CONFIG_PATH=/opt/freetype2/lib/pkgconfig
         
         # Clone FFMPEG repo
         git clone --depth 1 git://source.ffmpeg.org/ffmpeg.git -b release/5.0
