@@ -75,11 +75,23 @@ jobs:
          # Build FFMPEG
          make -j 8
          make install
+    - name: Check archs
+      run: |
+        echo "Freetype arch:" 
+        lipo /opt/freetype2/lib/libfreetype.a -archs
+        echo "FFMPEG arch:" 
+        lipo ./installed/lib/libavcodec.a -archs
     - name: Package binaries
       run: |
+        # Place freetype and ffmpeg files for packaging
+        mkdir ./bundle-installed
+        mkdir ./bundle-installed/freetype
+        mkdir ./bundle-installed/ffmpeg
+        sudo cp -r /opt/freetype2/ ./bundle-installed/freetype
+        sudo cp -r ./installed ./bundle-installed/ffmpeg
         # Create archive of the pre-built FFMPEG libraries
-        tar cfvz ffmpeg-libs-macos-static.tar.gz ./installed
+        7z a ffmpeg-libs-macos-static.7z ./bundle-installed
     - uses: actions/upload-artifact@v1
       with:
         name: ffmpeg-libs-macos-static
-        path: ffmpeg-libs-macos-static.tar.gz
+        path: ffmpeg-libs-macos-static.7z
